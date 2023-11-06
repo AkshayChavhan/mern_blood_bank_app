@@ -117,5 +117,33 @@ const loginController = async (req, res) => {
         })
     }
 }
-module.exports = { registerController, loginController };
+
+// GET CURRENT USER
+// test 
+// http://localhost:8081/api/v1/auth/current-user
+// type:-> GET
+// {
+//     "email": "akshay4@gmail.com",
+//     "password": "Akshay@123"
+// }
+const currentUserController = async (req, res) => {
+    try {
+        const user = await userModel.findOne({ _id: req.body.userId });
+        return res.status(200).send({
+            success: true,
+            message: "User fetched successfully.",
+            user
+        }) 
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Unable to get user"
+        })
+    }
+}
+
+
+module.exports = { registerController, loginController, currentUserController };
 
