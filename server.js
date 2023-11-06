@@ -1,3 +1,6 @@
+const connectDB = require("./config/db");
+
+// import packages
 const express = require("express");
 const colors = require("colors");
 const morgan = require("morgan");
@@ -7,6 +10,8 @@ const cors = require("cors");
 // dotenv setup
 const dotenv = require("dotenv");
 dotenv.config()
+
+
 // rest object
 const app = express()
 
@@ -24,7 +29,7 @@ const PORT = process.env.PORT || 8081
 
 // route
 // URL :-> http://localhost:8081/
-app.use("/api/v1/", require("./routes/testRoutes") )
+app.use("/api/v1/", require("./routes/testRoutes"))
 
 
 
@@ -32,8 +37,18 @@ app.use("/api/v1/", require("./routes/testRoutes") )
 
 
 
-
-// server listening
-app.listen(PORT, () => {
-    console.log(`Server is running on port http://localhost:${PORT} in ${process.env.DEV_MODE}`)
-})
+// mongodb connection
+connectDB()
+    .then((connected) => {
+        try {
+            // server listening
+            app.listen(PORT, () => {
+                console.log(`Server is running on port http://localhost:${PORT} in ${process.env.DEV_MODE}`)
+            })
+        } catch (error) {
+            console.log(`Error occurs while server connection as ${error}`);
+        }
+    })
+    .catch((error) => {
+        console.log(`Error occurs while DB connection as ${error}`);
+    })
