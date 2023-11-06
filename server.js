@@ -10,7 +10,7 @@ const cors = require("cors");
 // import files
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes.js");
-
+const inventoryRoutes = require("./routes/inventoryRoutes.js");
 
 
 
@@ -38,10 +38,11 @@ const PORT = process.env.PORT || 8081
 // URL :-> http://localhost:8081/
 app.use("/api/v1/", require("./routes/testRoutes"))
 
-
+// login , authentification and registration user 
 app.use("/api/v1/auth", authRoutes)
 
-
+// inventory
+app.use("/api/v1/inventory" , inventoryRoutes)
 
 
 

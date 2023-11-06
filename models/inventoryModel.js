@@ -1,39 +1,43 @@
 const mongoose = require("mongoose");
 
 const inventorySchema = new mongoose.Schema({
-    inventoryType : {
-        type : String,
-        required:[ true , "Inventory type is required"],
-        enum: ['in','out']
+    inventoryType: {
+      type: String,
+      required: [true, "inventory type require"],
+      enum: ["in", "out"],
     },
-    bloogGroup : {
-        type : String,
-        required:[ true , "Blood group is required"],
-        enum: ['O+','O-','A+','A-','AB-','AB+','B+','B-']
+    bloodGroup: {
+      type: String,
+      required: [true, "blood group is require"],
+      enum: ["O+", "O-", "AB+", "AB-", "A+", "A-", "B+", "B-"],
     },
-    inventoryType : {
-        type : Number,
-        required:[ true , "Blood qunatity is required"]
+    quantity: {
+      type: Number,
+      require: [true, "blood quanity is require"],
     },
-    organisation : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref:'organisations',
-        required:[ true , "Organisation is required"]
+    email: {
+      type: String,
+      required: [true, "Donar Email is Required"],
     },
-    hospital : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref:'users',
-        required: function(){
-            return this.inventoryType === 'out'
-        }       
+    organisation: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: [true, "organisation is require"],
     },
-    donor :{
-        type: mongoose.Schema.Types.ObjectId ,
-        ref: 'users',
-        required: function(){
-            return this.inventoryType === 'in';
-        }
-    }
-},{timestamps: true});
+    hospital: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: function () {
+        return this.inventoryType === "out";
+      },
+    },
+    donar: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: function () {
+        return this.inventoryType === "in";
+      },
+    },
+  },{timestamps: true});
 
 module.exports = mongoose.model('Inventory' , inventorySchema);
