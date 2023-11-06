@@ -1,10 +1,17 @@
-const connectDB = require("./config/db");
 
 // import packages
 const express = require("express");
 const colors = require("colors");
 const morgan = require("morgan");
 const cors = require("cors");
+
+
+
+// import files
+const connectDB = require("./config/db");
+const authRoutes = require("./routes/authRoutes.js");
+
+
 
 
 // dotenv setup
@@ -32,6 +39,7 @@ const PORT = process.env.PORT || 8081
 app.use("/api/v1/", require("./routes/testRoutes"))
 
 
+app.use("/api/v1/auth", authRoutes)
 
 
 
