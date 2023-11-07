@@ -24,3 +24,48 @@ export const userLogin = createAsyncThunk(
     }
   }
 );
+
+//register
+export const userRegister = createAsyncThunk(
+  "auth/register",
+  async (
+    {
+      name,
+      role,
+      email,
+      password,
+      phone,
+      organisationName,
+      address,
+      hospitalName,
+      website,
+    },
+    { rejectWithValue }
+  ) => {
+    try {
+      const { data } = await API.post("/auth/register", {
+        name,
+        role,
+        email,
+        password,
+        phone,
+        organisationName,
+        address,
+        hospitalName,
+        website,
+      });
+      if (data?.success) {
+        alert("User Registerd Successfully");
+        window.location.replace("/login");
+        // toast.success("User Registerd Successfully");
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
