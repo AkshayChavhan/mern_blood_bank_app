@@ -7,7 +7,7 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix ./client",
-    "dev" : "concurrently \"npm run server\" \"npm run client\"" 
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Akshay Chavhan",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.0",
     "morgan": "^1.10.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "react-icons": "^4.11.0"
   }
 }
