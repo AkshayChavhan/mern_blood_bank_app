@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const inventorySchema = new mongoose.Schema({
+const inventorySchema = new mongoose.Schema(
+  {
     inventoryType: {
       type: String,
       required: [true, "inventory type require"],
@@ -19,10 +20,6 @@ const inventorySchema = new mongoose.Schema({
       type: String,
       required: [true, "Donar Email is Required"],
     },
-    email: {
-      type: String,
-      required: [true, "Donar Email is Required"],
-    },
     organisation: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
@@ -33,7 +30,7 @@ const inventorySchema = new mongoose.Schema({
       ref: "users",
       required: function () {
         return this.inventoryType === "out";
-      }
+      },
     },
     donar: {
       type: mongoose.Schema.Types.ObjectId,
@@ -42,6 +39,8 @@ const inventorySchema = new mongoose.Schema({
         return this.inventoryType === "in";
       },
     },
-  },{timestamps: true});
+  },
+  { timestamps: true }
+);
 
 module.exports = mongoose.model('Inventory' , inventorySchema);
