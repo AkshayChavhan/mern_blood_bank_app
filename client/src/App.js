@@ -8,6 +8,7 @@ import ProtectedRoute from './components/Routes/ProtectedRoute';
 import PublicRoute from './components/Routes/PublicRoute';
 import Donar from "./pages/Dashboard/Donar";
 import Hospitals from "./pages/Dashboard/Hospitals";
+import OrganisationPage from './pages/Dashboard/OrganisationPage';
 
 
 
@@ -18,11 +19,18 @@ function App() {
       <Routes>
         <Route path="/" element={
           <ProtectedRoute><Homepage /> </ProtectedRoute>} />
-          <Route path="/donar" element={
+
+        <Route path="/donar" element={
           <ProtectedRoute><Donar /> </ProtectedRoute>} />
-          <Route path="/hospital" element={
+
+        <Route path="/hospital" element={
           <ProtectedRoute><Hospitals /> </ProtectedRoute>} />
+
+        <Route path="/organisation" element={
+          <ProtectedRoute><OrganisationPage /> </ProtectedRoute>} />
+
         <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+
         <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
       </Routes>
     </>
