@@ -181,4 +181,36 @@ const getHospitalController = async (req, res) => {
   }
 };
 
-module.exports = { createInventoryController, getInventoryController ,getDonarsController , getHospitalController }
+
+// GET ORG PROFILES
+const getOrganisationController = async (req, res) => {
+  try {
+    const donar = req.body.userId;
+    // console.log("donar m orgId => ", donar);
+    const orgId = await inventoryModel.distinct("organisation", { donar });
+    //find org
+    const organisations = await userModel.find({
+      _id: { $in: orgId },
+    });
+    return res.status(200).send({
+      success: true,
+      message: "Org Data Fetched Successfully",
+      organisations,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "Error In ORG API",
+      error,
+    });
+  }
+};
+
+module.exports = {
+  createInventoryController,
+  getInventoryController,
+  getDonarsController,
+  getHospitalController,
+  getOrganisationController
+}
